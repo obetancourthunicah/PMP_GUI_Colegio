@@ -193,6 +193,11 @@ public class Alumno {
     public void setESTADO(String _ESTADO) {
         this._ESTADO = _ESTADO;
     }
+    
+    public String getNOMBRECOMPLETO(){
+        return String.format("%s %s", this._NOMBRES, this._APELLIDOS);
+    }
+    
     private double _ID;
     private String _NOMBRES;
     private String _APELLIDOS;

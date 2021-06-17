@@ -34,6 +34,9 @@ public class AlumnosList extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jBNuevo = new javax.swing.JButton();
+        jBEditar = new javax.swing.JButton();
+        jBEliminar = new javax.swing.JButton();
+        jBMostrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -44,6 +47,27 @@ public class AlumnosList extends javax.swing.JFrame {
             }
         });
 
+        jBEditar.setText("Editar");
+        jBEditar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBEditarMouseClicked(evt);
+            }
+        });
+
+        jBEliminar.setText("Eliminar");
+        jBEliminar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBEliminarMouseClicked(evt);
+            }
+        });
+
+        jBMostrar.setText("Mostrar");
+        jBMostrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBMostrarMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -51,13 +75,23 @@ public class AlumnosList extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jBNuevo)
-                .addContainerGap(310, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jBEditar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jBEliminar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jBMostrar)
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(265, Short.MAX_VALUE)
-                .addComponent(jBNuevo)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBNuevo)
+                    .addComponent(jBEditar)
+                    .addComponent(jBEliminar)
+                    .addComponent(jBMostrar))
                 .addContainerGap())
         );
 
@@ -82,13 +116,62 @@ public class AlumnosList extends javax.swing.JFrame {
         alumnoModal.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                System.out.println(e.toString());
                 boolean reload = ((AlumnoForm) e.getSource()).getReloadParent();
                 System.out.println(reload);
             }
         });
         alumnoModal.setVisible(true);
     }//GEN-LAST:event_jBNuevoMouseClicked
+
+    private void jBEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBEditarMouseClicked
+        // TODO add your handling code here:
+        //TODO obtener el id a partir del registro seleccionado de la tabla
+        // Primero creamos una instancia de la pantalla, Clase 
+        double id = 1;
+        AlumnoForm alumnoModal = new AlumnoForm("UPD", id);
+        
+        alumnoModal.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                boolean reload = ((AlumnoForm) e.getSource()).getReloadParent();
+                System.out.println(reload);
+            }
+        });
+        alumnoModal.setVisible(true);
+    }//GEN-LAST:event_jBEditarMouseClicked
+
+    private void jBEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBEliminarMouseClicked
+        // TODO add your handling code here:
+        // TODO add your handling code here:
+        //TODO obtener el id a partir del registro seleccionado de la tabla
+        // Primero creamos una instancia de la pantalla, Clase 
+        double id = 1;
+        AlumnoForm alumnoModal = new AlumnoForm("DEL", id);
+        
+        alumnoModal.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                boolean reload = ((AlumnoForm) e.getSource()).getReloadParent();
+                System.out.println(reload);
+            }
+        });
+        alumnoModal.setVisible(true);
+    }//GEN-LAST:event_jBEliminarMouseClicked
+
+    private void jBMostrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBMostrarMouseClicked
+        // TODO add your handling code here:
+         double id = 1;
+        AlumnoForm alumnoModal = new AlumnoForm("DSP", id);
+        
+        alumnoModal.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                boolean reload = ((AlumnoForm) e.getSource()).getReloadParent();
+                System.out.println(reload);
+            }
+        });
+        alumnoModal.setVisible(true);
+    }//GEN-LAST:event_jBMostrarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -127,6 +210,9 @@ public class AlumnosList extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBEditar;
+    private javax.swing.JButton jBEliminar;
+    private javax.swing.JButton jBMostrar;
     private javax.swing.JButton jBNuevo;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
