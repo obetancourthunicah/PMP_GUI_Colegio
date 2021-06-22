@@ -23,6 +23,7 @@ public class AlumnosList extends javax.swing.JFrame {
      */
     public AlumnosList() {
         alumnos = new AlumnosTableModel();
+        AlumnoModel.verificarTablaAlumnos();
         alumnos.addRows(AlumnoModel.getAlumnos());
         initComponents();
         setExtendedState(this.getExtendedState() | JFrame.MAXIMIZED_BOTH);
