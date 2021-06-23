@@ -25,7 +25,10 @@ public class AlumnosList extends javax.swing.JFrame {
         alumnos = new AlumnosTableModel();
         AlumnoModel.verificarTablaAlumnos();
         alumnos.addRows(AlumnoModel.getAlumnos());
-        initComponents();
+        
+        initComponents(); //INit Componente es generado por java designer
+        
+        //Maximiza la pantalla
         setExtendedState(this.getExtendedState() | JFrame.MAXIMIZED_BOTH);
         //model
     }
@@ -144,9 +147,11 @@ public class AlumnosList extends javax.swing.JFrame {
         // TODO add your handling code here:
         //TODO obtener el id a partir del registro seleccionado de la tabla
         // Primero creamos una instancia de la pantalla, Clase 
-        double id = 1;
-        AlumnoForm alumnoModal = new AlumnoForm("UPD", id);
+        double id = -1;
         
+        int rowIndex = jTable1.getSelectedRow();
+        id = Double.valueOf(jTable1.getModel().getValueAt(rowIndex, 0).toString());
+        AlumnoForm alumnoModal = new AlumnoForm("UPD", id);
         alumnoModal.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -162,7 +167,10 @@ public class AlumnosList extends javax.swing.JFrame {
         // TODO add your handling code here:
         //TODO obtener el id a partir del registro seleccionado de la tabla
         // Primero creamos una instancia de la pantalla, Clase 
-        double id = 1;
+        double id = -1;
+        
+        int rowIndex = jTable1.getSelectedRow();
+        id = Double.valueOf(jTable1.getModel().getValueAt(rowIndex, 0).toString());
         AlumnoForm alumnoModal = new AlumnoForm("DEL", id);
         
         alumnoModal.addWindowListener(new WindowAdapter() {
@@ -177,7 +185,10 @@ public class AlumnosList extends javax.swing.JFrame {
 
     private void jBMostrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBMostrarMouseClicked
         // TODO add your handling code here:
-         double id = 1;
+        double id = -1;
+        
+        int rowIndex = jTable1.getSelectedRow();
+        id = Double.valueOf(jTable1.getModel().getValueAt(rowIndex, 0).toString());
         AlumnoForm alumnoModal = new AlumnoForm("DSP", id);
         
         alumnoModal.addWindowListener(new WindowAdapter() {

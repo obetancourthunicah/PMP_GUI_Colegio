@@ -95,4 +95,45 @@ public class AlumnoModel {
         }
     }
     
+     public static Alumno getAlumnosById(double Id){
+        Alumno _miAlumno = new Alumno();
+        
+        // Todo obtener de la base de datos
+        /* Alumno _miAlumno = new Alumno();
+        _miAlumno.setID(1);
+        _miAlumno.setNOMBRES("Orlando");
+        _miAlumno.setAPELLIDOS("Betancourth");
+        _miAlumno.setIDENTIDAD("0801198412349");
+        _miAlumno.setCORREO("obetancourthunicah@gmail.com");
+        alumnos.add(_miAlumno);
+        */
+        try {
+            Connection conn = Conn.obtenerConexion();
+
+            String SQLGetAlumnos = String.format("Select * FROM alumnos where ID=%s;", String.valueOf(Id));
+            System.out.println(SQLGetAlumnos);
+            Statement comandoSql = conn.createStatement();
+            ResultSet cursorAlumnos = comandoSql.executeQuery(SQLGetAlumnos);
+            while( cursorAlumnos.next() ){
+                _miAlumno.setID(cursorAlumnos.getInt("ID"));
+                _miAlumno.setNOMBRES(cursorAlumnos.getString("NOMBRES"));
+                _miAlumno.setAPELLIDOS(cursorAlumnos.getString("APELLIDOS"));
+                _miAlumno.setIDENTIDAD(cursorAlumnos.getString("IDENTIDAD"));
+                _miAlumno.setCORREO(cursorAlumnos.getString("CORREO"));
+                _miAlumno.setGENERO(cursorAlumnos.getString("GENERO"));
+                _miAlumno.setFCHNAC(cursorAlumnos.getString("FCHNAC"));
+                _miAlumno.setTELEFONO(cursorAlumnos.getString("TELEFONO"));
+                _miAlumno.setGRADO(cursorAlumnos.getString("GRADO"));
+                _miAlumno.setESTADO(cursorAlumnos.getString("ESTADO"));
+                _miAlumno.setSECCION(cursorAlumnos.getString("SECCION"));
+            }
+            comandoSql.close();
+
+            return _miAlumno;
+        
+        } catch (Exception ex) {
+            System.err.print(ex.getMessage());
+            return _miAlumno;
+        }
+    }
 }

@@ -5,6 +5,7 @@
  */
 package com.unicahiccpmp.colegio;
 import com.unicahiccpmp.dao.Alumno;
+import com.unicahiccpmp.dao.AlumnoModel;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
@@ -16,6 +17,7 @@ public class AlumnoForm extends javax.swing.JDialog {
 
     private Alumno currentAlumno;
     private boolean _reloadParent = false;
+    private String _mode;
     
     public boolean getReloadParent(){
         return _reloadParent;
@@ -29,14 +31,24 @@ public class AlumnoForm extends javax.swing.JDialog {
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
         
-        currentAlumno = new Alumno();
+        
         // INS, UPD, DEL, DSP
+        _mode = Mode;
         if (!Mode.equals("INS")){
             //No es un insert por tando debe existir en la DB
             //Proceso para capturar el Registro
-            currentAlumno.setID(id);
-            currentAlumno.setNOMBRES("Orlando Jose");
-            currentAlumno.setAPELLIDOS("Betancourth");
+            System.out.println(id);
+            currentAlumno = AlumnoModel.getAlumnosById(id);
+            jTNombres.setText(currentAlumno.getNOMBRES());
+            jTApellidos.setText(currentAlumno.getAPELLIDOS());
+            jTIdentidad.setText(currentAlumno.getIDENTIDAD());
+            jTTelefono.setText(currentAlumno.getTELEFONO());
+            jTCorreo.setText(currentAlumno.getCORREO());
+            jTFchNacimiento.setText(currentAlumno.getFCHNAC());
+            jCGenero.setSelectedItem(currentAlumno.getGENERO());
+            
+        } else {
+            currentAlumno = new Alumno();
         }
         switch(Mode){
             case "INS":
@@ -262,6 +274,26 @@ public class AlumnoForm extends javax.swing.JDialog {
 
     private void JBConfirmarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JBConfirmarMouseClicked
         // TODO add your handling code here:
+        
+        
+        //Extrer la informacion
+        currentAlumno.setNOMBRES(jTNombres.getText());
+        currentAlumno.setAPELLIDOS(jTApellidos.getText());
+        currentAlumno.setIDENTIDAD(jTIdentidad.getText());
+        currentAlumno.setTELEFONO(jTTelefono.getText());
+        currentAlumno.setCORREO(jTCorreo.getText());
+        currentAlumno.setFCHNAC(jTFchNacimiento.getText());
+        currentAlumno.setGENERO(jCGenero.getSelectedItem().toString());
+        
+        switch(_mode){
+            case "INS":
+                break;
+            case "UPD":
+                break;
+            case "DEL":
+                break;
+        }
+        
         _reloadParent = true;
         dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
     }//GEN-LAST:event_JBConfirmarMouseClicked
