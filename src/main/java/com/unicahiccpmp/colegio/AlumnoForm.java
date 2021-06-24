@@ -61,15 +61,27 @@ public class AlumnoForm extends javax.swing.JDialog {
                 break;
             case "DEL":
                 jLTitle.setText(String.format("Eliminar Alumno %.0f %s", currentAlumno.getID(), currentAlumno.getNOMBRECOMPLETO()));
+                deshabilitarCampos();
                 JBConfirmar.setText("Eliminar");
                 break;
             case "DSP":
                 JBConfirmar.setVisible(false);
                 JBCancel.setText("Salir");
+                deshabilitarCampos();
                 jLTitle.setText(String.format("Alumno %.0f %s", currentAlumno.getID(), currentAlumno.getNOMBRECOMPLETO()));
                 break;
         }
         
+    }
+    
+    private void deshabilitarCampos(){
+         jTNombres.setEditable(false);
+         jTApellidos.setEditable(false);
+         jTIdentidad.setEditable(false);
+         jTTelefono.setEditable(false);
+         jTCorreo.setEditable(false);
+         jTFchNacimiento.setEditable(false);
+         jCGenero.setEditable(false);
     }
 
     /**
@@ -285,16 +297,20 @@ public class AlumnoForm extends javax.swing.JDialog {
         currentAlumno.setFCHNAC(jTFchNacimiento.getText());
         currentAlumno.setGENERO(jCGenero.getSelectedItem().toString());
         
+        //Validaciones Expresiones Regulares
+        
         switch(_mode){
             case "INS":
+                _reloadParent = AlumnoModel.agregarAlumno(currentAlumno);
                 break;
             case "UPD":
+                _reloadParent = AlumnoModel.editarAlumno(currentAlumno);
                 break;
             case "DEL":
+                _reloadParent = AlumnoModel.eliminarAlumno(currentAlumno);
                 break;
         }
         
-        _reloadParent = true;
         dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
     }//GEN-LAST:event_JBConfirmarMouseClicked
 

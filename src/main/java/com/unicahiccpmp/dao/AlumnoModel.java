@@ -95,7 +95,7 @@ public class AlumnoModel {
         }
     }
     
-     public static Alumno getAlumnosById(double Id){
+    public static Alumno getAlumnosById(double Id){
         Alumno _miAlumno = new Alumno();
         
         // Todo obtener de la base de datos
@@ -136,4 +136,79 @@ public class AlumnoModel {
             return _miAlumno;
         }
     }
+    
+    public static boolean agregarAlumno(Alumno alumnoAAgregar){
+        try{
+            String sqlStr = "INSERT INTO alumnos (NOMBRES, APELLIDOS, IDENTIDAD, TELEFONO, CORREO, GENERO, FCHINGRESO, FCHNAC, GRADO, SECCION , ESTADO) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s' , '%s')";
+            
+            Connection conn = Conn.obtenerConexion();
+            Statement comandoSQL = conn.createStatement();
+            int registroAfectados = comandoSQL.executeUpdate(
+                    String.format(sqlStr,
+                       alumnoAAgregar.getNOMBRES(), 
+                       alumnoAAgregar.getAPELLIDOS(), 
+                       alumnoAAgregar.getIDENTIDAD(), 
+                       alumnoAAgregar.getTELEFONO(), 
+                       alumnoAAgregar.getCORREO(), 
+                       alumnoAAgregar.getGENERO(), 
+                       alumnoAAgregar.getFCHINGRESO(), 
+                       alumnoAAgregar.getFCHNAC(), 
+                       alumnoAAgregar.getGRADO(), 
+                       alumnoAAgregar.getSECCION(), 
+                       alumnoAAgregar.getESTADO()
+                    )
+            );
+            return registroAfectados > 0;
+        }catch(Exception ex){
+            System.err.println(ex.getMessage());
+            return false;
+        }
+    }
+    
+    public static boolean editarAlumno(Alumno alumnoAEditar){
+        try{
+            String sqlStr = "UPDATE  alumnos set NOMBRES = '%s', APELLIDOS = '%s', IDENTIDAD = '%s', TELEFONO = '%s', CORREO = '%s', GENERO = '%s', FCHNAC =  '%s', GRADO =  '%s', SECCION =  '%s', ESTADO =  '%s' where ID=%f;";
+            
+            Connection conn = Conn.obtenerConexion();
+            Statement comandoSQL = conn.createStatement();
+            int registroAfectados = comandoSQL.executeUpdate(
+                    String.format(sqlStr,
+                       alumnoAEditar.getNOMBRES(), 
+                       alumnoAEditar.getAPELLIDOS(), 
+                       alumnoAEditar.getIDENTIDAD(), 
+                       alumnoAEditar.getTELEFONO(), 
+                       alumnoAEditar.getCORREO(), 
+                       alumnoAEditar.getGENERO(), 
+                       alumnoAEditar.getFCHNAC(), 
+                       alumnoAEditar.getGRADO(), 
+                       alumnoAEditar.getSECCION(), 
+                       alumnoAEditar.getESTADO(),
+                       alumnoAEditar.getID()
+                    )
+            );
+            return registroAfectados > 0;
+        }catch(Exception ex){
+            System.err.println(ex.getMessage());
+            return false;
+        }
+    }
+    
+    public static boolean eliminarAlumno(Alumno alumnoAEliminar){
+        try{
+            String sqlStr = "DELETE FROM  alumnos where ID=%f;";
+            
+            Connection conn = Conn.obtenerConexion();
+            Statement comandoSQL = conn.createStatement();
+            int registroAfectados = comandoSQL.executeUpdate(
+                    String.format(sqlStr,
+                       alumnoAEliminar.getID()
+                    )
+            );
+            return registroAfectados > 0;
+        }catch(Exception ex){
+            System.err.println(ex.getMessage());
+            return false;
+        }
+    }
+    
 }

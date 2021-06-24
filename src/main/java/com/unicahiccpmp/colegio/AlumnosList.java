@@ -10,6 +10,7 @@ import com.unicahiccpmp.dao.AlumnoModel;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
+import javax.swing.table.AbstractTableModel;
 
 /**
  *
@@ -129,76 +130,54 @@ public class AlumnosList extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jBNuevoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBNuevoMouseClicked
-        // TODO add your handling code here:
-        AlumnoForm alumnoModal = new AlumnoForm("INS", 0);
+    private void levantarModalAlumno( String modalidad, double id){
+        AlumnoForm alumnoModal = new AlumnoForm(modalidad, id);
         
         alumnoModal.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
                 boolean reload = ((AlumnoForm) e.getSource()).getReloadParent();
-                System.out.println(reload);
+                if (reload){
+                    alumnos.clearTableModelData();
+                    alumnos.addRows(AlumnoModel.getAlumnos());
+                    jTable1.repaint();
+                }
             }
         });
         alumnoModal.setVisible(true);
+    }
+    
+    private double obtenerIDSeleccionado(){
+        double id = -1;
+        int rowIndex = jTable1.getSelectedRow();
+        id = Double.valueOf(jTable1.getModel().getValueAt(rowIndex, 0).toString());
+        return id;
+    }
+    
+    private void jBNuevoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBNuevoMouseClicked
+        // TODO add your handling code here:
+        levantarModalAlumno("INS", 0);
     }//GEN-LAST:event_jBNuevoMouseClicked
 
     private void jBEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBEditarMouseClicked
         // TODO add your handling code here:
         //TODO obtener el id a partir del registro seleccionado de la tabla
         // Primero creamos una instancia de la pantalla, Clase 
-        double id = -1;
         
-        int rowIndex = jTable1.getSelectedRow();
-        id = Double.valueOf(jTable1.getModel().getValueAt(rowIndex, 0).toString());
-        AlumnoForm alumnoModal = new AlumnoForm("UPD", id);
-        alumnoModal.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                boolean reload = ((AlumnoForm) e.getSource()).getReloadParent();
-                System.out.println(reload);
-            }
-        });
-        alumnoModal.setVisible(true);
+        levantarModalAlumno("UPD", obtenerIDSeleccionado());
     }//GEN-LAST:event_jBEditarMouseClicked
 
     private void jBEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBEliminarMouseClicked
         // TODO add your handling code here:
         // TODO add your handling code here:
         //TODO obtener el id a partir del registro seleccionado de la tabla
-        // Primero creamos una instancia de la pantalla, Clase 
-        double id = -1;
         
-        int rowIndex = jTable1.getSelectedRow();
-        id = Double.valueOf(jTable1.getModel().getValueAt(rowIndex, 0).toString());
-        AlumnoForm alumnoModal = new AlumnoForm("DEL", id);
-        
-        alumnoModal.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                boolean reload = ((AlumnoForm) e.getSource()).getReloadParent();
-                System.out.println(reload);
-            }
-        });
-        alumnoModal.setVisible(true);
+         levantarModalAlumno("DEL", obtenerIDSeleccionado());
     }//GEN-LAST:event_jBEliminarMouseClicked
 
     private void jBMostrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBMostrarMouseClicked
         // TODO add your handling code here:
-        double id = -1;
-        
-        int rowIndex = jTable1.getSelectedRow();
-        id = Double.valueOf(jTable1.getModel().getValueAt(rowIndex, 0).toString());
-        AlumnoForm alumnoModal = new AlumnoForm("DSP", id);
-        
-        alumnoModal.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                boolean reload = ((AlumnoForm) e.getSource()).getReloadParent();
-                System.out.println(reload);
-            }
-        });
-        alumnoModal.setVisible(true);
+         levantarModalAlumno("DSP", obtenerIDSeleccionado());
     }//GEN-LAST:event_jBMostrarMouseClicked
 
     /**
