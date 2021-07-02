@@ -6,14 +6,18 @@
 package com.unicahiccpmp.colegio;
 import com.unicahiccpmp.dao.Alumno;
 import com.unicahiccpmp.dao.AlumnoModel;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.JOptionPane;
 /**
  *
  * @author obetancourth
  */
-public class AlumnoForm extends javax.swing.JDialog {
+public class AlumnoForm extends javax.swing.JFrame {
 
     private Alumno currentAlumno;
     private boolean _reloadParent = false;
@@ -27,9 +31,10 @@ public class AlumnoForm extends javax.swing.JDialog {
      */
     public AlumnoForm(String Mode, double id) {
         initComponents();
-        setModal(true);
+        //setModal(true);
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
+        //this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
+        this.setLocation(0, dim.height/2-this.getSize().height/2);
         
         
         // INS, UPD, DEL, DSP
@@ -116,10 +121,12 @@ public class AlumnoForm extends javax.swing.JDialog {
         jLabel10 = new javax.swing.JLabel();
         jCEstado = new javax.swing.JComboBox<>();
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setAlwaysOnTop(true);
         setSize(new java.awt.Dimension(401, 390));
         setType(java.awt.Window.Type.POPUP);
 
-        jPanel1.setSize(new java.awt.Dimension(401, 373));
+        jPanel1.setSize(new java.awt.Dimension(465, 409));
 
         jLTitle.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         jLTitle.setText("Trabajar con Alumno");
@@ -152,7 +159,6 @@ public class AlumnoForm extends javax.swing.JDialog {
         jLabel9.setMaximumSize(new java.awt.Dimension(59, 16));
         jLabel9.setMinimumSize(new java.awt.Dimension(59, 16));
         jLabel9.setPreferredSize(new java.awt.Dimension(59, 16));
-        jLabel9.setSize(new java.awt.Dimension(0, 0));
 
         jCGrado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1er Grado", "2do Grado", "3er Grado", "4to Grado", "5to Grado", "6to Grado", "7mo Grado", "8vo Grado", "9no Grado" }));
         jCGrado.setMinimumSize(new java.awt.Dimension(120, 27));
@@ -171,7 +177,7 @@ public class AlumnoForm extends javax.swing.JDialog {
             }
         });
 
-        jLabel10.setText("Estado");
+        jLabel10.setText("Sección");
 
         jCEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sección A", "Sección B", "Sección D" }));
 
@@ -180,37 +186,39 @@ public class AlumnoForm extends javax.swing.JDialog {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTCorreo)
-                    .addComponent(jLTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTNombres, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTIdentidad, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
-                                .addComponent(jTApellidos)
-                                .addComponent(jLabel5))
-                            .addComponent(jTTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jCGrado, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jCGenero, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(25, 25, 25)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTFchNacimiento, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel10)
-                            .addComponent(jCEstado, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTCorreo)
+                            .addComponent(jLTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jTNombres, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jTIdentidad, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
+                                        .addComponent(jTApellidos)
+                                        .addComponent(jLabel5))
+                                    .addComponent(jTTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jCGrado, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jCGenero, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(25, 25, 25)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jTFchNacimiento)
+                                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
+                                    .addComponent(jLabel10)
+                                    .addComponent(jCEstado, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(JBConfirmar)
@@ -259,7 +267,7 @@ public class AlumnoForm extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jCGrado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jCEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JBCancel)
                     .addComponent(JBConfirmar))
@@ -270,7 +278,7 @@ public class AlumnoForm extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -296,22 +304,43 @@ public class AlumnoForm extends javax.swing.JDialog {
         currentAlumno.setCORREO(jTCorreo.getText());
         currentAlumno.setFCHNAC(jTFchNacimiento.getText());
         currentAlumno.setGENERO(jCGenero.getSelectedItem().toString());
+        currentAlumno.setGRADO(jCGrado.getSelectedItem().toString());
+        currentAlumno.setSECCION(jCEstado.getSelectedItem().toString());
+        currentAlumno.setESTADO("ACT");
         
         //Validaciones Expresiones Regulares
+        boolean hayError = false;
         
-        switch(_mode){
-            case "INS":
-                _reloadParent = AlumnoModel.agregarAlumno(currentAlumno);
-                break;
-            case "UPD":
-                _reloadParent = AlumnoModel.editarAlumno(currentAlumno);
-                break;
-            case "DEL":
-                _reloadParent = AlumnoModel.eliminarAlumno(currentAlumno);
-                break;
+        boolean errorNombres =  Validador.esCadenaVacia(currentAlumno.getNOMBRES());
+        if(errorNombres){
+            jTNombres.setBackground(Color.red);
+        } else {
+            jTNombres.setBackground(Color.white);
         }
+        //System.out.println(errorNombres);
         
-        dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+        hayError = errorNombres && true;
+        if (!hayError) {
+            switch(_mode){
+                case "INS":
+                    SimpleDateFormat convertidorDeFecha = new SimpleDateFormat("yyyy-MM-dd");
+                    currentAlumno.setFCHINGRESO( convertidorDeFecha.format(new Date()) );
+                    
+                    _reloadParent = AlumnoModel.agregarAlumno(currentAlumno);
+                    break;
+                case "UPD":
+                    _reloadParent = AlumnoModel.editarAlumno(currentAlumno);
+                    break;
+                case "DEL":
+                    _reloadParent = AlumnoModel.eliminarAlumno(currentAlumno);
+                    break;
+            }
+
+            dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+        } else {
+            JOptionPane.showMessageDialog(this.getParent(), "Hay campos que requieren revisión", "Error de Datos", JOptionPane.ERROR_MESSAGE);
+            
+        }
     }//GEN-LAST:event_JBConfirmarMouseClicked
 
 

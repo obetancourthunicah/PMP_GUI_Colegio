@@ -8,6 +8,7 @@ package com.unicahiccpmp.dao;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 
 /**
@@ -110,10 +111,14 @@ public class AlumnoModel {
         try {
             Connection conn = Conn.obtenerConexion();
 
-            String SQLGetAlumnos = String.format("Select * FROM alumnos where ID=%s;", String.valueOf(Id));
-            System.out.println(SQLGetAlumnos);
-            Statement comandoSql = conn.createStatement();
-            ResultSet cursorAlumnos = comandoSql.executeQuery(SQLGetAlumnos);
+            //String SQLGetAlumnos = String.format("Select * FROM alumnos where ID=%s;", String.valueOf(Id));
+            String SQLGetAlumnos = "Select * FROM alumnos where ID=?;";
+            System.out.println((int) Id);
+            //Statement comandoSql = conn.createStatement();
+            PreparedStatement comandoSql = conn.prepareStatement(SQLGetAlumnos);
+            comandoSql.setInt(1, (int) Id);
+            
+            ResultSet cursorAlumnos = comandoSql.executeQuery();
             while( cursorAlumnos.next() ){
                 _miAlumno.setID(cursorAlumnos.getInt("ID"));
                 _miAlumno.setNOMBRES(cursorAlumnos.getString("NOMBRES"));
@@ -139,25 +144,25 @@ public class AlumnoModel {
     
     public static boolean agregarAlumno(Alumno alumnoAAgregar){
         try{
-            String sqlStr = "INSERT INTO alumnos (NOMBRES, APELLIDOS, IDENTIDAD, TELEFONO, CORREO, GENERO, FCHINGRESO, FCHNAC, GRADO, SECCION , ESTADO) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s' , '%s')";
+           // String sqlStr = "INSERT INTO alumnos (NOMBRES, APELLIDOS, IDENTIDAD, TELEFONO, CORREO, GENERO, FCHINGRESO, FCHNAC, GRADO, SECCION , ESTADO) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s' , '%s')";
+            String sqlStr = "INSERT INTO alumnos (NOMBRES, APELLIDOS, IDENTIDAD, TELEFONO, CORREO, GENERO, FCHINGRESO, FCHNAC, GRADO, SECCION , ESTADO) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ? , ?)";
             
             Connection conn = Conn.obtenerConexion();
-            Statement comandoSQL = conn.createStatement();
-            int registroAfectados = comandoSQL.executeUpdate(
-                    String.format(sqlStr,
-                       alumnoAAgregar.getNOMBRES(), 
-                       alumnoAAgregar.getAPELLIDOS(), 
-                       alumnoAAgregar.getIDENTIDAD(), 
-                       alumnoAAgregar.getTELEFONO(), 
-                       alumnoAAgregar.getCORREO(), 
-                       alumnoAAgregar.getGENERO(), 
-                       alumnoAAgregar.getFCHINGRESO(), 
-                       alumnoAAgregar.getFCHNAC(), 
-                       alumnoAAgregar.getGRADO(), 
-                       alumnoAAgregar.getSECCION(), 
-                       alumnoAAgregar.getESTADO()
-                    )
-            );
+            //Statement comandoSQL = conn.createStatement();
+            PreparedStatement comandoSQL = conn.prepareStatement(sqlStr);
+            comandoSQL.setString(1, alumnoAAgregar.getNOMBRES()); 
+            comandoSQL.setString(2,alumnoAAgregar.getAPELLIDOS());  
+            comandoSQL.setString(3,alumnoAAgregar.getIDENTIDAD()); 
+            comandoSQL.setString(4,alumnoAAgregar.getTELEFONO()); 
+            comandoSQL.setString(5,alumnoAAgregar.getCORREO()); 
+            comandoSQL.setString(6,alumnoAAgregar.getGENERO()); 
+            comandoSQL.setString(7,alumnoAAgregar.getFCHINGRESO());  
+            comandoSQL.setString(8,alumnoAAgregar.getFCHNAC()); 
+            comandoSQL.setString(9,alumnoAAgregar.getGRADO()); 
+            comandoSQL.setString(10,alumnoAAgregar.getSECCION());  
+            comandoSQL.setString(11,alumnoAAgregar.getESTADO()); 
+            
+            int registroAfectados = comandoSQL.executeUpdate();
             return registroAfectados > 0;
         }catch(Exception ex){
             System.err.println(ex.getMessage());
